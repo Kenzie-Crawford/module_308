@@ -2,11 +2,11 @@
 
 // Sample data for this exercise
 const course = { id: 101, name: "JavaScript Fundamentals" };
-const assignmentGroup = { 
-    id: 1, 
-    name: "Week 1 Assignments", 
+const assignmentGroup = {
+    id: 1,
+    name: "Week 1 Assignments",
     course_id: 101,
-    group_weight: 25 
+    group_weight: 25
 };
 
 const assignment = {
@@ -30,6 +30,13 @@ const submission = {
 // If they match, set isValidGroup to true, otherwise set it to false
 let isValidGroup;
 // (your code here)
+if (assignmentGroup.course_id === course.id) {
+    isValidGroup = true;
+} else {
+    isValidGroup = false;
+}
+
+
 
 
 // Task 2: Check if assignment is late
@@ -38,6 +45,12 @@ let isValidGroup;
 // If submitted_at is greater than due_at, the assignment is late
 let isLate;
 // (your code here)
+if (submission.submission.submitted_at > assignment.due_at) {
+    isLate = true;
+} else {
+    isLate = false;
+
+}
 
 
 // Task 3: Apply late penalty
@@ -46,6 +59,12 @@ let isLate;
 // Otherwise, use the original score
 let finalScore;
 // (your code here)
+if (submission.submission.submission_at > assignment.due_at) {
+    finalScore = submission.submission.score - (assignment.points_possible * 0.10);
+} else {
+    finalScore = submission.submission.score;
+
+}
 
 
 // Task 4: Determine letter grade using if/else
@@ -54,6 +73,21 @@ let finalScore;
 const percentage = (finalScore / assignment.points_possible) * 100;
 let letterGrade;
 // (your code here)
+if (percentage >= 90) {
+    letterGrade = "A";
+}
+else if (percentage >= 80) {
+    letterGrade = "B";
+}
+else if (percentage >= 70) {
+    letterGrade = "C";
+}
+else if (percentage >= 60) {
+    letterGrade = "D";
+} else {
+    letterGrade = "F";
+}
+
 
 
 // Task 5: Use a switch statement to categorize assignment difficulty
@@ -63,6 +97,20 @@ let letterGrade;
 let difficulty;
 // Hint: You can switch on true and use case conditions like: case (points_possible <= 50):
 // (your code here)
+switch (true) {
+    case (assignment.points_possible <= 50):
+        difficulty = "Easy";
+        break;
+        case (assignment.points_possible <= 100):
+        difficulty = "Medium";
+        break;
+        case (assignment.points_possible <= 150):
+        difficulty = "Hard";
+        break;
+        default:
+            difficulty = "Very Hard";
+            break;
+}
 
 
 // Task 6: Nested if/else - Determine if submission should count
