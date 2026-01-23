@@ -8,9 +8,13 @@
 ## Pre-Exercise Quiz
 Test your knowledge before starting:
 1. Which of the following is a way to declare a constant in JavaScript?
+const
 2. What will the expression "10" + 5 return?
+105
 3. How do you check if two values are both equal in value and in type in JavaScript?
+===
 4. What is the best practice for declaring a variable in JavaScript?
+let
 
 ## Instructions
 Complete the tasks in `index.js`. Run the file with `node index.js` to test your code.
