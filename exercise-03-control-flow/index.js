@@ -120,6 +120,12 @@ switch (true) {
 // Set shouldCount to true or false
 let shouldCount;
 // (your code here)
+if(isValidGroup) {
+    shouldCount = true;
+    
+} else {
+    shouldCount = false;
+}
 
 
 // Task 7: Complex validation
@@ -130,6 +136,13 @@ let shouldCount;
 // Set isValidSubmission to true only if ALL conditions are met
 let isValidSubmission;
 // (your code here)
+if (assignment.points_possible > 0 && score >= 0 && score <= assignment.points_possible
+    && submission.learner_id != null) {
+    isValidSubmission = true;
+} else {
+    isValidSubmission = false;
+
+    }
 
 
 // Display results (don't modify this part)
