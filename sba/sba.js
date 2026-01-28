@@ -81,31 +81,34 @@ function getLearnerData(course, ag, submissions) {
     try {
 
         if (ag.course_id !== course.id) {
-            throw new Error("Assignment group does not belong to the specified course.");
+            throw new Error("Assignment group does not belong to the specified course."); //Validate if this is the correct data for the correct class
         }
     } catch (error) {
         console.error(error.message);
         return [];
     }
-
+        //make a date so that we can compare the due date to see if its late
     const currentDate = new Date();
 
+    //create function so we can see when the assignment is due
     function isAssignmentDue(assignment) {
-        const dueDate = new Date(assignment.due_at);
-        return dueDate <= currentDate;
+        const dueDate = new Date(assignment.due_at);//load data from assignment due date into variable
+        return dueDate <= currentDate; //returns true if the assignment is due on the current date
     }
 
+    
     function isSubmissionLate(submission, assignment) {
         const submissionDate = new Date(submission.submission.submitted_at);
         const dueDate = new Date(assignment.due_at);
 
-        return submissionDate > dueDate;
+        return submissionDate > dueDate; //returns true if the assignment is late
+                                            
     }
 
     function calculateFinalScore(submission, assignment) {
         let score = submission.submission.score;
         if (isSubmissionLate(submission, assignment)) {
-            score = score - (assignment.points_possible * .1);
+            score = score - (assignment.points_possible * .1);//apply penalty if isSubmissionLate returns true
         }
         return score;
     }
@@ -120,20 +123,21 @@ function getLearnerData(course, ag, submissions) {
 
     function getLearnerIds() {
 
-        const learnerIds = [];
+        const learnerIds = [];      //creating array of learners by id
 
         for (const submission of submissions) {
             if (!learnerIds.includes(submission.learner_id)){
-                learnerIds.push(submission.learner_id)
+                learnerIds.push(submission.learner_id)  //putting learners into our array by their id so we can then group them 
             }
         }
         return learnerIds;
     }
 
     const results = [];
-    const learnerIds = getLearnerIds();
+    const learnerIds = getLearnerIds();    //callng learnerid fucnction and making it a variable learnerIds
      
-    for(const learnerId of learnerIds){
+    for(const learnerId of learnerIds){ //looping through our array learnerIds,
+                                        //storing their results in object result
         const result = {
             id: learnerId,
             avg: 0
@@ -143,9 +147,9 @@ function getLearnerData(course, ag, submissions) {
         let totalPossible = 0;
 
         for (const submission of submissions) {
-            if(submission.learner_id === learnerId) {
+            if(submission.learner_id === learnerId) {  //connecting submissions by id to the learner id who submitted them 
                 const assignment = findAssignmentById(submission.assignment_id);
-                if(!assignment || !isAssignmentDue(assignment)){
+                if(!assignment || !isAssignmentDue(assignment)){ //ignore if the assignment isn't there or it isn't due
                     continue;
                 }
                 const finalScore = calculateFinalScore(submission, assignment);
@@ -160,7 +164,7 @@ function getLearnerData(course, ag, submissions) {
             result.avg = totalScore / totalPossible;
         }
 
-        results.push(result);
+        results.push(result); //putting results into our results object
     }
     return results;
 }
