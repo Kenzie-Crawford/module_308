@@ -141,8 +141,7 @@ if (assignment.points_possible > 0 && score >= 0 && score <= assignment.points_p
     isValidSubmission = true;
 } else {
     isValidSubmission = false;
-
-    }
+}
 
 
 // Display results (don't modify this part)
@@ -155,3 +154,17 @@ console.log("Letter Grade:", letterGrade);
 console.log("Difficulty:", difficulty);
 console.log("Should Count:", shouldCount);
 console.log("Is Valid Submission:", isValidSubmission);
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
